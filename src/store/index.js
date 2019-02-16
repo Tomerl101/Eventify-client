@@ -1,5 +1,6 @@
 import { decorate, observable, action } from "mobx";
-import { getUserInfo as getUserInfoApi } from '../api/getUserInfo';
+import { getUserInfo as getUserInfoServer } from '../server/getUserInfo';
+import { getUserEvents as getUserEventsServer } from '../server/getUserEvents';
 
 class Store {
 
@@ -16,6 +17,10 @@ class Store {
   playlistList = [];
   tracksList = [];
   isLoading = false;
+
+  setIsLoading(isLoading) {
+    this.isLoading = isLoading;
+  }
 
   setAccessToken(accessToken) {
     this.accessToken = accessToken;
@@ -34,11 +39,15 @@ class Store {
   }
 
   async getUserInfo() {
-    const result = await getUserInfoApi();
-    console.log('TCL: Store -> getUserInfo -> result', result)
+    const result = await getUserInfoServer();
     this.setUserId(result.id);
     this.setUserImage(result.images);
     this.setUserName(result.display_name);
+  }
+
+  async getUserEvents() {
+    const result = await getUserEventsServer(this.userId);
+    this.eventsList = result.events;
   }
 
   // async getUserEvents(){
@@ -75,7 +84,10 @@ decorate(Store, {
   setAccessToken: action,
   setUserId: action,
   setUserImage: action,
-  setUserName: action
+  setUserName: action,
+  getUserInfo: action,
+  getUserevents: action,
+  setIsLoading: action,
 })
 
 export const store = new Store()

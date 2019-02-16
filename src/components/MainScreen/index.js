@@ -1,4 +1,5 @@
 import React from 'react';
+import { inject, observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Row from '../common/row';
@@ -20,48 +21,33 @@ const styles = theme => ({
   row: { paddingTop: 25 }
 })
 
-class PrimarySearchAppBar extends React.Component {
+
+class MainScreen extends React.Component {
 
 
-  state = {
-    anchorEl: null,
-    mobileMoreAnchorEl: null,
-  };
-
+  getEventsCards = () => {
+    const { eventsList } = this.props.store;
+    return eventsList.map(e => <Card item={e} key={e._id} />)
+  }
+  // make loading inside the main component
   render() {
-    const { classes } = this.props;
-
+    const { classes, store } = this.props;
+    const { isLoading } = store;
     return (
-      <div className={classes.root}>
-        <Divider />
-        <Row className={classes.row} justify='space-between'>
-          <Title />
-          <NavButtons />
-        </Row>
-        <Divider />
-        <Grid container justify='center' spacing={Number(40)}>
-          <Grid item>
-            <Card />
+      isLoading ? null :
+        <div className={classes.root}>
+          <Divider />
+          <Row className={classes.row} justify='space-between'>
+            <Title />
+            <NavButtons />
+          </Row>
+          <Divider />
+          <Grid container justify='center' spacing={Number(40)}>
+            {this.getEventsCards()}
           </Grid>
-          <Grid item>
-            <Card />
-          </Grid>
-          <Grid item>
-            <Card />
-          </Grid>
-          <Grid item>
-            <Card />
-          </Grid>
-          <Grid item>
-            <Card />
-          </Grid>
-          <Grid item>
-            <Card />
-          </Grid>
-        </Grid>
-      </div>
+        </div>
     );
   }
 }
 
-export default withStyles(styles)(PrimarySearchAppBar);
+export default withStyles(styles)(inject('store')(observer(MainScreen)));

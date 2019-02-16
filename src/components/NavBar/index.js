@@ -14,7 +14,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { styles } from './styles';
 
 
-class PrimarySearchAppBar extends Component {
+class NavBar extends Component {
 
   render() {
     const { userImage } = this.props.store;
@@ -60,4 +60,4 @@ class PrimarySearchAppBar extends Component {
     );
   }
 }
-export default withStyles(styles)(inject('store')(observer(PrimarySearchAppBar)));
+export default withStyles(styles)(inject('store')(observer(NavBar)));
