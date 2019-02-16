@@ -23,6 +23,7 @@ class App extends Component {
     if (!accessToken) {
       window.location.href = 'http://localhost:8080';
     };
+    return;
   }
 
   componentDidMount() {
@@ -32,7 +33,8 @@ class App extends Component {
     fetch('https://api.spotify.com/v1/me', {
       headers: { 'Authorization': 'Bearer ' + accessToken }
     }).then((respone) => respone.json())
-      .then((data) => { store.userImage = data.images[0].url; console.log(data) });
+      .then((data) => { store.userImage = data.images[0].url; console.log(data) })
+      .catch((error) => alert('bad access token'));
   }
 
   render() {

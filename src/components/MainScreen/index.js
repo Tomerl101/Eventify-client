@@ -1,20 +1,23 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 import Row from '../common/row';
 import Title from './components/Title';
 import NavButtons from './components/NavButtons';
 import Card from './card';
+import { Divider } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
     minHeight: '100vh',
     backgroundColor: theme.palette.secondary.main,
-    overflow: 'scrollable'
+    overflow: 'scrollable',
+    paddingLeft: 65,
+    paddingRight: 65,
   },
   grow: {
-    flexGrow: 1,
   },
-  row: { paddingLeft: 65, paddingRight: 65, paddingTop: 25 }
+  row: { paddingTop: 25 }
 })
 
 class PrimarySearchAppBar extends React.Component {
@@ -30,22 +33,32 @@ class PrimarySearchAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
+        <Divider />
         <Row className={classes.row} justify='space-between'>
           <Title />
           <NavButtons />
         </Row>
-
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Divider />
+        <Grid container justify='center' spacing={Number(40)}>
+          <Grid item>
+            <Card />
+          </Grid>
+          <Grid item>
+            <Card />
+          </Grid>
+          <Grid item>
+            <Card />
+          </Grid>
+          <Grid item>
+            <Card />
+          </Grid>
+          <Grid item>
+            <Card />
+          </Grid>
+          <Grid item>
+            <Card />
+          </Grid>
+        </Grid>
       </div>
     );
   }
