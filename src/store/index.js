@@ -1,8 +1,10 @@
-import { decorate, observable } from "mobx"
+import { decorate, observable, action } from "mobx";
+import { getUserInfo as getUserInfoApi } from '../api/getUserInfo';
 
 class Store {
 
   accessToken = '';
+  userId = '';
   userName = 'Tomer';
   userImage = '';
   trackName = 'Eye of the Tiger';
@@ -15,9 +17,27 @@ class Store {
   tracksList = [];
   isLoading = false;
 
+  setAccessToken(accessToken) {
+    this.accessToken = accessToken;
+  }
+
+  setUserId(userId) {
+    this.userId = userId;
+  }
+
+  async getUserInfo() {
+    const { id } = await getUserInfoApi();
+    this.setUserId(id);
+  }
+
+  // async getUserEvents(){
+  //   const result = await getUserEventsApi();
+  //   this.eventsList = result.eventList
+  // }
+
 
   // getEvents();
-  // getEventPlaylists();
+  // getUserEventPlaylists();
   // createEvent();
   // getUserPlaylists();
 
@@ -41,6 +61,7 @@ decorate(Store, {
   playlistList: observable,
   tracksList: observable,
   isLoading: observable,
+  setAccessToken: action,
 })
 
 export const store = new Store()

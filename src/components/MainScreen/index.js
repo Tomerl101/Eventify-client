@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Row from '../common/row';
 import Title from './components/Title';
 import NavButtons from './components/NavButtons';
-import Card from './card';
+import Card from './components/Card';
 import { Divider } from '@material-ui/core';
 
 const styles = theme => ({

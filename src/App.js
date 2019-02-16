@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { theme } from './theme';
 import NavBar from './components/NavBar';
@@ -12,7 +13,9 @@ import queryString from 'query-string';
 import { configure } from "mobx";
 
 //force strict 
-// configure({ enforceActions: 'observed' });
+configure({ enforceActions: 'observed' });
+
+axios.defaults.baseURL = 'http://localhost:8080/';
 
 class App extends Component {
 
@@ -29,12 +32,27 @@ class App extends Component {
   componentDidMount() {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
-    store.accessToken = accessToken;
-    fetch('https://api.spotify.com/v1/me', {
-      headers: { 'Authorization': 'Bearer ' + accessToken }
-    }).then((respone) => respone.json())
-      .then((data) => { store.userImage = data.images[0].url; console.log(data) })
-      .catch((error) => alert('bad access token'));
+    if (accessToken) {
+      store.setAccessToken(accessToken);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${store.accessToken}`
+    }
+
+    store.getUserInfo();
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      const token = accessToken;
+
+      console.log('TCL: App -> window.onSpotifyWebPlaybackSDKReady -> token', token)
+      const player = new window.Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token); }
+      });
+
+      // Ready
+      player.on('ready', data => {
+        console.log('Ready with Device ID', data.device_id);
+      });
+      player.connect();
+    }
   }
 
   render() {
