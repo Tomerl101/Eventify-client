@@ -29,7 +29,8 @@ class App extends Component {
     return;
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    store.setIsLoading(true);
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
     if (accessToken) {
@@ -37,11 +38,9 @@ class App extends Component {
       axios.defaults.headers.common['Authorization'] = `Bearer ${store.accessToken}`
     }
 
-    store.getUserInfo();
     window.onSpotifyWebPlaybackSDKReady = () => {
       const token = accessToken;
 
-      console.log('TCL: App -> window.onSpotifyWebPlaybackSDKReady -> token', token)
       const player = new window.Spotify.Player({
         name: 'Web Playback SDK Quick Start Player',
         getOAuthToken: cb => { cb(token); }
@@ -53,6 +52,12 @@ class App extends Component {
       });
       player.connect();
     }
+
+    await store.getUserInfo();
+    await store.getUserEvents();
+
+    store.setIsLoading(false);
+
   }
 
   render() {
