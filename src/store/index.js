@@ -25,9 +25,20 @@ class Store {
     this.userId = userId;
   }
 
+  setUserImage(userImage) {
+    this.userImage = userImage[0].url;
+  }
+
+  setUserName(userName) {
+    this.userName = userName;
+  }
+
   async getUserInfo() {
-    const { id } = await getUserInfoApi();
-    this.setUserId(id);
+    const result = await getUserInfoApi();
+    console.log('TCL: Store -> getUserInfo -> result', result)
+    this.setUserId(result.id);
+    this.setUserImage(result.images);
+    this.setUserName(result.display_name);
   }
 
   // async getUserEvents(){
@@ -62,6 +73,9 @@ decorate(Store, {
   tracksList: observable,
   isLoading: observable,
   setAccessToken: action,
+  setUserId: action,
+  setUserImage: action,
+  setUserName: action
 })
 
 export const store = new Store()
