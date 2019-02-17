@@ -11,7 +11,7 @@ class SongInfo extends Component {
     const { classes } = this.props;
     return (
       <Row>
-        <img className={classes.image} alt='album_photo' />
+        <img className={classes.image} src='https://cdn.athemes.com/wp-content/uploads/Slide-Music-WordPress-Theme.jpg' alt='album_photo' />
         <div className={classes.trackTextStyle}>
           <Typography variant="body2"  >
             {trackName}

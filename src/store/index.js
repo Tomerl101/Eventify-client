@@ -18,6 +18,30 @@ class Store {
   tracksList = [];
   isLoading = false;
 
+  //music player
+  player = null;
+
+  checkForPlayer(player) {
+    this.player = 8;
+    // if (window.Spotify !== null) {
+    //   this.player = new window.Spotify.Player({
+    //     name: "Eventify",
+    //     getOAuthToken: cb => { cb(this.accessToken); },
+    //   });
+    //   this.player.on('ready', data => {
+    //     console.log('Ready with Device ID', data.device_id);
+    //   });
+    //   this.player.connect();
+    // }
+    this.player = player;
+  }
+
+  togglePlay() {
+    // console.log('togglePlay->player', this.player);
+    console.log('play');
+    console.log(this.player);
+  }
+
   setIsLoading(isLoading) {
     this.isLoading = isLoading;
   }
@@ -38,16 +62,24 @@ class Store {
     this.userName = userName;
   }
 
+  setEventsList(events) {
+    this.eventsList = events;
+  }
+
   async getUserInfo() {
+    this.setIsLoading(true);
     const result = await getUserInfoServer();
     this.setUserId(result.id);
     this.setUserImage(result.images);
     this.setUserName(result.display_name);
+    this.setIsLoading(false);
   }
 
   async getUserEvents() {
+    this.setIsLoading(true);
     const result = await getUserEventsServer(this.userId);
-    this.eventsList = result.events;
+    this.setEventsList(result.events);
+    this.setIsLoading(false);
   }
 
   // async getUserEvents(){
@@ -69,6 +101,7 @@ class Store {
 }
 
 decorate(Store, {
+  // player: observable,
   accessToken: observable,
   userName: observable,
   userImage: observable,
@@ -88,6 +121,8 @@ decorate(Store, {
   getUserInfo: action,
   getUserevents: action,
   setIsLoading: action,
+  setEventsList: action,
+  // setMusicPlayer: action
 })
 
 export const store = new Store()
