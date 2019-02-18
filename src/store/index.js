@@ -12,16 +12,12 @@ class Store {
   trackDuration = '';
   trackImage = '';
   trackAuthor = 'James Bond';
-  trackCurrentTime = '';
   eventsList = [];
-  playlistList = [];
+  playlistsList = [];
   tracksList = [];
   trackUri;
   playlistUri;
   isLoading = false;
-  isPlaying = false;
-
-  //music player
 
   setIsLoading(isLoading) {
     this.isLoading = isLoading;
@@ -47,12 +43,6 @@ class Store {
     this.eventsList = events;
   }
 
-  setIsPlaying(isPlaying) {
-    console.log('TCL: Store -> setIsPlaying -> isPlaying', isPlaying)
-    console.log('oaoaoaoaaoaoaoao');
-    this.isPlaying = true;
-  }
-
   async getUserInfo() {
     this.setIsLoading(true);
     const result = await getUserInfoServer();
@@ -68,27 +58,9 @@ class Store {
     this.setEventsList(result.events);
     this.setIsLoading(false);
   }
-
-  // async getUserEvents(){
-  //   const result = await getUserEventsApi();
-  //   this.eventsList = result.eventList
-  // }
-
-
-  // getEvents();
-  // getUserEventPlaylists();
-  // createEvent();
-  // getUserPlaylists();
-
-  // playTrack();
-  // skipTrack();
-  // previusTrack();
-
-
 }
 
 decorate(Store, {
-  player: observable,
   accessToken: observable,
   userName: observable,
   userImage: observable,
@@ -96,11 +68,9 @@ decorate(Store, {
   trackDuration: observable,
   trackImage: observable,
   trackAuthor: observable,
-  trackCurrentTime: observable,
   eventsList: observable,
   playlistList: observable,
   tracksList: observable,
-  isPlaying: observable,
   isLoading: observable,
   setAccessToken: action,
   setUserId: action,
@@ -110,9 +80,6 @@ decorate(Store, {
   getUserevents: action,
   setIsLoading: action,
   setEventsList: action,
-  setMusicPlayer: action,
-  togglePlay: action,
-  setIsPlaying: action
 })
 
 export const store = new Store()

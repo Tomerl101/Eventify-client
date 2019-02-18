@@ -11,14 +11,15 @@ import Typography from '@material-ui/core/Typography';
 
 
 
-class Playlists extends React.Component {
+class PlaylistsScreen extends React.Component {
   getEventsCards = () => {
     const { eventsList } = this.props.store;
     return eventsList.map(e => <Card item={e} key={e._id} />)
   }
 
   render() {
-    const { classes, store } = this.props;
+    const { classes, store, match } = this.props;
+    console.log(match.params.eventId)
     const { isLoading } = store;
     return (
       <div className={classes.root}>
@@ -26,12 +27,12 @@ class Playlists extends React.Component {
         <Typography variant="h6" >
           Noa Sutrday Night Events
       </Typography>
-        <Grid className={classes.gridStyle} container spacing={Number(40)}>
-          {isLoading ? <Loader /> : this.getEventsCards()}
-        </Grid>
+        <Typography variant="h6" >
+          Noa Sutrday Night Events
+      </Typography>
       </div>
     );
   }
 }
 
-export default withStyles(styles)(inject('store')(observer(EventScreen)));
+export default withStyles(styles)(inject('store')(observer(PlaylistsScreen)));
