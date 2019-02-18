@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles';
-import { inject, observer } from 'mobx-react';
 import IconButton from '@material-ui/core/IconButton';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import PauseCircleFilledIcon from '@material-ui/icons/PauseCircleFilled';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
 import ShuffleIcon from '@material-ui/icons/Shuffle';
 import RepeatIcon from '@material-ui/icons/Repeat';
@@ -17,9 +17,11 @@ const styles = theme => ({
 })
 
 class MusicButtons extends Component {
+
   render() {
-    const { classes, store } = this.props;
-    const { togglePlay } = store;
+
+    const { classes, isPlaying, duration, onClickPlay } = this.props;
+    console.log('TCL: MusicButtons -> render -> controllerState', isPlaying)
     return (
       <Row>
         <IconButton aria-label="repeat">
@@ -28,8 +30,11 @@ class MusicButtons extends Component {
         <IconButton aria-label="previous">
           <SkipPreviousIcon fontSize='large' />
         </IconButton>
-        <IconButton onClick={togglePlay} aria-label="play" >
-          <PlayCircleFilledIcon className={classes.playBtnStyle} />
+        <IconButton onClick={onClickPlay} aria-label="play" >
+          {
+            isPlaying ? <PauseCircleFilledIcon className={classes.playBtnStyle} /> :
+              <PlayCircleFilledIcon className={classes.playBtnStyle} />
+          }
         </IconButton>
         <IconButton aria-label="forward">
           <SkipNextIcon fontSize='large' />
@@ -42,4 +47,4 @@ class MusicButtons extends Component {
   }
 }
 
-export default withStyles(styles)(inject('store')(observer(MusicButtons)));
+export default withStyles(styles)(MusicButtons);

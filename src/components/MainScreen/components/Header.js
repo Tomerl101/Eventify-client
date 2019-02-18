@@ -5,18 +5,12 @@ import Title from './Title';
 import NavButtons from './NavButtons';
 import { Divider } from '@material-ui/core';
 
-const styles = theme => ({
-  row: { paddingTop: 25 }
-}
-)
 
-
-function Header(props) {
-  const { classes } = props;
+export default function Header(props) {
   return (
     <>
       <Divider />
-      <Row className={classes.row} justify='space-between'>
+      <Row justify='space-between'>
         <Title />
         <NavButtons />
       </Row>
@@ -24,5 +18,3 @@ function Header(props) {
     </>
   );
 }
-
-export default withStyles(styles)(Header);

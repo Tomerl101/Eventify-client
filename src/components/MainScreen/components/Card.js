@@ -10,10 +10,10 @@ import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   card: {
-    maxWidth: 225,
+    maxWidth: 150,
   },
   media: {
-    height: 250,
+    height: 180,
   },
   cardContent: {
     backgroundColor: theme.palette.secondary.light
