@@ -6,11 +6,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { getEventPlaylists as getEventPlaylistsServer } from '../../../server/getEventPlaylists';
 
 
 const styles = theme => ({
   card: {
-    maxWidth: 150,
+    width: 275,
+    height: 340
   },
   media: {
     height: 180,
@@ -20,12 +22,16 @@ const styles = theme => ({
   }
 });
 
+const onCardClick = (id) => {
+  let playlists = getEventPlaylistsServer(id);
+}
+
 function Card(props) {
   const { classes, item } = props;
   const { event_img: imageUrl, name: eventName, _id } = item;
   return (
     <Grid item>
-      <MuiCard className={classes.card} raised>
+      <MuiCard className={classes.card} onClick={() => onCardClick(_id)}>
         <CardActionArea>
           <CardMedia
             className={classes.media}
@@ -33,7 +39,7 @@ function Card(props) {
             title={eventName}
           />
           <CardContent className={classes.cardContent}>
-            <Typography gutterBottom variant="h5" component="h4">
+            <Typography gutterBottom variant="h6" component="h5">
               {eventName}
             </Typography>
             <Typography component="p">
