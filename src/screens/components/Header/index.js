@@ -1,12 +1,11 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Row from '../../common/row';
-import Title from './Title';
-import NavButtons from './NavButtons';
 import { Divider } from '@material-ui/core';
+import Row from '../../../components/common/row';
+import Title from './components/Title';
+import NavButtons from './components/NavButtons';
 
 
-export default function Header(props) {
+export default function Header() {
   return (
     <>
       <Divider />

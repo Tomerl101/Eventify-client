@@ -6,7 +6,7 @@ import axios from 'axios';
 import { theme } from './theme';
 import NavBar from './components/NavBar';
 import Tabs from './components/Tabs';
-import EventScreen from './components/MainScreen/screens/events';
+import EventsScreen from './screens/EventsScreen';
 import MusicController from './components/MusicController';
 import { Provider } from 'mobx-react';
 import { store } from './store';
@@ -43,7 +43,8 @@ class App extends Component {
             <>
               <NavBar />
               <Tabs />
-              <Route path={screenTypes.SCREEN_EVENTS} component={EventScreen} />
+              <Route path={screenTypes.SCREEN_EVENTS} component={EventsScreen} />
+              {/* <Route path={screenTypes.SCREEN_PLAYLISTS} component={PlaylistsScreen} /> */}
               <MusicController />
             </>
           </Provider>
