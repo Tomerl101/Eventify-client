@@ -1,6 +1,8 @@
 import { decorate, observable, action } from "mobx";
 import { getUserInfo as getUserInfoServer } from '../server/getUserInfo';
 import { getUserEvents as getUserEventsServer } from '../server/getUserEvents';
+import { getEventPlaylists as getEventPlaylistsServer } from '../server/getEventPlaylists';
+import { getPlaylistTracks as getPlaylistTracksServer } from '../server/getPlaylistTracks';
 
 class Store {
 
@@ -43,6 +45,16 @@ class Store {
     this.eventsList = events;
   }
 
+  setPlaylistsList(playlists) {
+    this.playlistsList = playlists;
+  }
+
+  setTracksList(tracks) {
+    this.tracksList = tracks;
+  }
+
+
+
   async getUserInfo() {
     this.setIsLoading(true);
     const result = await getUserInfoServer();
@@ -56,6 +68,20 @@ class Store {
     this.setIsLoading(true);
     const result = await getUserEventsServer(this.userId);
     this.setEventsList(result.events);
+    this.setIsLoading(false);
+  }
+
+  async geEventPlaylists() {
+    this.setIsLoading(true);
+    const result = await getEventPlaylistsServer(this.userId);
+    this.setPlaylistsList(result.events);
+    this.setIsLoading(false);
+  }
+
+  async getTrackslists() {
+    this.setIsLoading(true);
+    const result = await getPlaylistTracksServer(this.userId);
+    this.setTracksList(result.tracks);
     this.setIsLoading(false);
   }
 }
