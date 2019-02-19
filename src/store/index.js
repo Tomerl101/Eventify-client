@@ -98,14 +98,14 @@ decorate(Store, {
   playlistList: observable,
   tracksList: observable,
   isLoading: observable,
-  setAccessToken: action,
-  setUserId: action,
-  setUserImage: action,
-  setUserName: action,
-  getUserInfo: action,
-  getUserevents: action,
-  setIsLoading: action,
-  setEventsList: action,
+  setAccessToken: action.bound,
+  setUserId: action.bound,
+  setUserImage: action.bound,
+  setUserName: action.bound,
+  getUserInfo: action.bound,
+  getUserevents: action.bound,
+  setIsLoading: action.bound,
+  setEventsList: action.bound,
 })
 
 export const store = new Store()

@@ -1,20 +1,32 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router'
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
 
-export default class NavButtons extends Component {
+class NavButtons extends Component {
+
+  goBack = () => {
+    this.props.history.goBack();
+  }
+
+  goForward = () => {
+    this.props.history.goForward();
+  }
+
   render() {
     return (
       <div>
-        <IconButton aria-label="back">
+        <IconButton onClick={this.goBack} aria-label="back">
           <ChevronLeft fontSize='large' />
         </IconButton>
-        <IconButton aria-label="forward">
+        <IconButton onClick={this.goForward} aria-label="forward">
           <ChevronRight fontSize='large' />
         </IconButton>
       </div>
     )
   }
 }
+
+export default withRouter(NavButtons);
 
