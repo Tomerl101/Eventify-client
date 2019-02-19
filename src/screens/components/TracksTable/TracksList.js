@@ -3,9 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import TableHeader from './components/TableHeader';
 
 const styles = theme => ({
   root: {
@@ -38,15 +37,7 @@ function TracksList(props) {
 
   return (
     <Table className={classes.table}>
-      <TableHead>
-        <TableRow hover>
-          <TableCell>TITLE</TableCell>
-          <TableCell align="right">ARTIST</TableCell>
-          <TableCell align="right">ALBUM</TableCell>
-          <TableCell align="right">DURATION</TableCell>
-          <TableCell align="right">Protein (g)</TableCell>
-        </TableRow>
-      </TableHead>
+      <TableHeader />
       <TableBody>
         {rows.map(row => (
           <TableRow key={row.id} hover>
