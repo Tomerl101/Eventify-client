@@ -43,7 +43,7 @@ class TracksTable extends Component {
     const playlistUri = window.location.pathname.split('/')[2]
     const { store } = this.props;
     const { deviceId, accessToken } = store;
-    putPlayTrack(deviceId, accessToken, playlistUri, trackUri, index)
+    putPlayTrack(deviceId, accessToken, playlistUri, index)
   }
 
   render() {
