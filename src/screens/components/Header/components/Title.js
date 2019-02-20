@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import Typography from '@material-ui/core/Typography';
 
-export default class Title extends Component {
+class Title extends Component {
   render() {
+    const { userName } = this.props.store
     return (
       <Typography variant="h6" >
-        Noa Sutrday Night Events
+        {userName}
       </Typography>
     )
   }
 }
+
+export default inject('store')(observer(Title));

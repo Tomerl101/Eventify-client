@@ -8,6 +8,5 @@ export const styles = theme => ({
   },
   gridStyle: {
     marginTop: 20,
-    paddingLeft: 50
   }
 })

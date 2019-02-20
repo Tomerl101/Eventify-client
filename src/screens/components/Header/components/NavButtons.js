@@ -3,6 +3,7 @@ import { withRouter } from 'react-router'
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import ChevronRight from '@material-ui/icons/ChevronRight';
+import MenuList from '../../../../components/common/MenuList';
 
 class NavButtons extends Component {
 
@@ -23,7 +24,10 @@ class NavButtons extends Component {
         <IconButton onClick={this.goForward} aria-label="forward">
           <ChevronRight fontSize='large' />
         </IconButton>
-      </div>
+        <IconButton>
+          <MenuList />
+        </IconButton>
+      </div >
     )
   }
 }

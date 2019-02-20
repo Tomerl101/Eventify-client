@@ -48,7 +48,8 @@ class App extends Component {
   }
 
   render() {
-    return (
+    const { accessToken } = store;
+    return (accessToken ?
       <Router>
         <MuiThemeProvider theme={theme}>
           <Provider store={store}>
@@ -63,6 +64,8 @@ class App extends Component {
           </Provider>
         </MuiThemeProvider>
       </Router>
+      :
+      null
     );
   }
 }

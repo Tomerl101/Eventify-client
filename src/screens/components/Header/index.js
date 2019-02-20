@@ -4,7 +4,6 @@ import Row from '../../../components/common/row';
 import Title from './components/Title';
 import NavButtons from './components/NavButtons';
 
-
 export default function Header() {
   return (
     <>

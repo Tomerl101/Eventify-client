@@ -1,8 +1,9 @@
-import { decorate, observable, action, when } from "mobx";
+import { decorate, observable, action } from "mobx";
 import { getUserInfo as getUserInfoServer } from '../server/getUserInfo';
 import { getUserEvents as getUserEventsServer } from '../server/getUserEvents';
 import { getEventPlaylists as getEventPlaylistsServer } from '../server/getEventPlaylists';
 import { getPlaylistTracks as getPlaylistTracksServer } from '../server/getPlaylistTracks';
+import { deleteEvent as deleteEventServer } from '../server/deleteEvent';
 import { transferPlayback } from '../api/transferPlayback';
 
 class Store {
@@ -26,6 +27,7 @@ class Store {
   isModalAddEventOpen = false;
   isLoading = false;
   isPlaying = false;
+  isPopUpOpen = false;
   player = '';
 
   setIsLoading(isLoading) {
@@ -66,6 +68,10 @@ class Store {
 
   onClickPlay() {
     this.player.togglePlay();
+  }
+
+  setIsPopUpOpen(isOpen) {
+    this.isPopUpOpen = isOpen;
   }
 
   setPlayer(player) {
@@ -118,6 +124,13 @@ class Store {
     this.setIsLoading(false);
   }
 
+  async deleteEvent(eventId) {
+    this.setIsLoading(true);
+    await deleteEventServer(eventId, this.userId);
+    this.setIsPopUpOpen(true);
+    this.setIsLoading(false);
+  }
+
   onPlayerStateChanged(state) {
     console.log(state);
     if (state !== null) {
@@ -159,6 +172,7 @@ decorate(Store, {
   tracksList: observable,
   isLoading: observable,
   isPlaying: observable,
+  isPopUpOpen: observable,
   player: observable,
   isModalAddEventOpen: observable,
   setAccessToken: action.bound,
@@ -174,6 +188,7 @@ decorate(Store, {
   setPlayer: action.bound,
   onClickPlay: action.bound,
   onPlayerStateChanged: action.bound,
+  setIsPopUpOpen: action.bound,
 })
 
 export const store = new Store()
