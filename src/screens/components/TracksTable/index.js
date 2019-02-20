@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import TableHeader from './components/TableHeader';
+import { putPlayTrack } from '../../../api/putPlayTrack';
+
+
 
 const styles = theme => ({
   root: {
@@ -19,29 +23,41 @@ const styles = theme => ({
 });
 
 
-const getRows = (items) => (
-  items.map(({ track }, index) => (
-    <TableRow key={index} hover>
-      <TableCell component="th" scope="row">
-        {`${index + 1}. ${track.name}`}
-      </TableCell>
-      <TableCell >{track.artists[0].name}</TableCell>
-      <TableCell >{track.album.name}</TableCell>
-    </TableRow>
-  ))
-)
 
-function TracksTable(props) {
-  const { classes, items } = props;
 
-  return (
-    <Table className={classes.table}>
-      <TableHeader />
-      <TableBody>
-        {getRows(items.slice())}
-      </TableBody>
-    </Table>
-  );
+class TracksTable extends Component {
+
+  getRows = (items) => (
+    items.map(({ track }, index) => (
+      <TableRow key={index} hover onClick={() => this.onClickPlayTrack(track.uri)}>
+        <TableCell component="th" scope="row">
+          {`${index + 1}. ${track.name}`}
+        </TableCell>
+        <TableCell >{track.artists[0].name}</TableCell>
+        <TableCell >{track.album.name}</TableCell>
+      </TableRow>
+    ))
+  )
+
+  onClickPlayTrack = (uri) => {
+    console.log('onclickplaytrack');
+    console.log('TCL: TracksTable -> onClickPlayTrack -> uri', uri)
+    const { store } = this.props;
+    const { deviceId, accessToken } = store;
+    putPlayTrack(deviceId, accessToken, uri)
+  }
+
+  render() {
+    const { classes, items } = this.props;
+    return (
+      <Table className={classes.table}>
+        <TableHeader />
+        <TableBody>
+          {this.getRows(items.slice())}
+        </TableBody>
+      </Table>
+    );
+  }
 }
 
-export default withStyles(styles)(TracksTable);
+export default withStyles(styles)(inject('store')(observer(TracksTable)));
