@@ -2,22 +2,11 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import EventForm from './EventForm';
-
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
 
 const styles = theme => ({
   paper: {
@@ -39,7 +28,6 @@ class EventModal extends Component {
 
   render() {
     const { isModalAddEventOpen } = this.props.store;
-    const { classes } = this.props;
 
     return (
       <Dialog

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { withRouter } from 'react-router'
 import { withStyles } from '@material-ui/core/styles';
 import MuiCard from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/PlaylistAdd';
@@ -46,7 +43,7 @@ class AddEventCard extends Component {
     }
 
     render() {
-        const { classes, item } = this.props;
+        const { classes } = this.props;
         return (
             <Grid item>
                 <MuiCard className={classes.card} onClick={this.onCardClick}>

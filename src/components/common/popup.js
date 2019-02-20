@@ -12,7 +12,7 @@ class Popup extends Component {
   };
 
   render() {
-    const { classes, store } = this.props;
+    const { store } = this.props;
     const { isPopUpOpen } = store;
 
     return (

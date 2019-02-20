@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
