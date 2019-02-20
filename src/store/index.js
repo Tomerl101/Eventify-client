@@ -4,6 +4,7 @@ import { getUserEvents as getUserEventsServer } from '../server/getUserEvents';
 import { getEventPlaylists as getEventPlaylistsServer } from '../server/getEventPlaylists';
 import { getPlaylistTracks as getPlaylistTracksServer } from '../server/getPlaylistTracks';
 import { deleteEvent as deleteEventServer } from '../server/deleteEvent';
+import { createEvent as createEventServer } from '../server/createEvent';
 import { transferPlayback } from '../api/transferPlayback';
 
 class Store {
@@ -30,6 +31,17 @@ class Store {
   isPopUpOpen = false;
   player = '';
 
+  //FORM INPUTS
+  inputs = observable({
+    inputPlaylistsUri: [],
+    inputEventImg: '',
+    inputEventName: '',
+    inputEventDescription: ''
+  })
+
+  onChangeInputs(key, value) {
+    this.inputs[key] = value;
+  }
   setIsLoading(isLoading) {
     this.isLoading = isLoading;
   }
@@ -139,6 +151,13 @@ class Store {
     this.setIsLoading(false);
   }
 
+  async createEvent() {
+    this.setIsLoading(true);
+    await createEventServer(this.inputs, this.userId);
+    await this.getUserEvents();
+    this.setIsLoading(false);
+  }
+
   onPlayerStateChanged(state) {
     console.log(state);
     if (state !== null) {
@@ -183,6 +202,10 @@ decorate(Store, {
   isPopUpOpen: observable,
   player: observable,
   isModalAddEventOpen: observable,
+  // inputPlaylistsUri: observable,
+  // inputEventImg: observable,
+  // inputEventName: observable,
+  // inputEventDescription: observable,
   setAccessToken: action.bound,
   setUserId: action.bound,
   setUserImage: action.bound,
@@ -199,6 +222,8 @@ decorate(Store, {
   onClickPrev: action.bound,
   onPlayerStateChanged: action.bound,
   setIsPopUpOpen: action.bound,
+  onChangeInputs: action.bound,
+  createEvent: action.bound,
 })
 
 export const store = new Store()

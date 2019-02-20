@@ -37,7 +37,7 @@ class EventCard extends Component {
 
   render() {
     const { classes, item, time } = this.props;
-    const { event_img: imageUrl, name: eventName } = item;
+    const { event_img: imageUrl, event_name: eventName } = item;
     return (
       <Grid item>
         <Fade in={true} timeout={time * 1500}>

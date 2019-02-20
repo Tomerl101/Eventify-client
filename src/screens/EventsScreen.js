@@ -8,7 +8,7 @@ import Header from './components/Header';
 import Loader from '../components/common/Loader';
 import EventModal from '../components/common/Modal';
 import { styles } from './style';
-
+import Popup from '../components/common/popup';
 class EventScreen extends React.Component {
 
   async componentDidMount() {
@@ -31,7 +31,8 @@ class EventScreen extends React.Component {
           {isLoading ? <Loader /> : this.getEventsCards()}
           <EventModal />
         </Grid>
-      </div>
+        <Popup message='Event Created Successfuly' />
+      </div >
     );
   }
 }

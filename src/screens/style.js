@@ -5,6 +5,7 @@ export const styles = theme => ({
     overflow: 'scrollable',
     paddingLeft: 65,
     paddingRight: 65,
+    paddingBottom: 40
   },
   gridStyle: {
     marginTop: 20,

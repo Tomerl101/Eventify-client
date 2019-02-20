@@ -24,7 +24,7 @@ class PlaylistsScreen extends React.Component {
         <Header />
         <Grid className={classes.gridStyle} container spacing={Number(40)}>
           {isLoading ? <Loader /> : this.getPlaylistCards()}
-          <Popup />
+          <Popup message='Deleted Successfuly!'/>
         </Grid>
       </div>
     );

@@ -26,7 +26,7 @@ function MySnackbarContent(props) {
     <SnackbarContent
       className={classes.success}
       aria-describedby="client-snackbar"
-      message={<span className={classes.msg} id="message-id">Event Deleted</span>}
+      message={<span className={classes.msg} id="message-id">{message}</span>}
       action={[
         <IconButton
           key="close"

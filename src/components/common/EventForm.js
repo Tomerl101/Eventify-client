@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { inject, observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 
 const styles = theme => ({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
+        marginTop: 15,
+        justifyContent: 'space-around'
     },
     formControl: {
         margin: theme.spacing.unit,
@@ -21,28 +19,26 @@ const styles = theme => ({
 });
 
 class EventForm extends Component {
-    state = {
-        name: 'Event Name',
-    };
-
-    componentDidMount() {
-        this.forceUpdate();
-    }
 
     handleChange = event => {
-        this.setState({ name: event.target.value });
+        const { onChangeInputs } = this.props.store;
+        onChangeInputs(event.target.name, event.target.value);
     };
 
     render() {
         const { classes } = this.props;
-
+        const { inputPlaylistsUri,
+            inputEventImg,
+            inputEventName,
+            inputEventDescription } = this.props.store
         return (
             <div className={classes.container}>
                 <FormControl className={classes.formControl}>
                     <InputLabel htmlFor="component-simple">Event Name</InputLabel>
                     <Input
                         id="component-simple"
-                        value={this.state.name}
+                        name='inputEventName'
+                        value={inputEventName}
                         onChange={this.handleChange}
                         aria-describedby="component-simple"
                     />
@@ -51,53 +47,38 @@ class EventForm extends Component {
                     <InputLabel htmlFor="component-simple">Event Image</InputLabel>
                     <Input
                         id="component-simple"
-                        value={this.state.image}
+                        name='inputEventImg'
+                        value={inputEventImg}
                         onChange={this.handleChange}
                         aria-describedby="component-simple"
                     />
-
                     <FormHelperText id="component-helper-text">Image URL</FormHelperText>
                 </FormControl>
                 <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="component-simple">Event ID</InputLabel>
+                    <InputLabel htmlFor="component-simple">Description</InputLabel>
                     <Input
                         id="component-simple"
-                        value={this.state.e_id}
+                        name='inputEventDescription'
+                        value={inputEventDescription}
                         onChange={this.handleChange}
                         aria-describedby="component-simple"
                     />
                 </FormControl>
-                <FormControl>
-                    <FormLabel component="legend">Add Playlists</FormLabel>
-                    <FormGroup>
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="playlist1" />
-                            }
-                            label="playlist1"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="playlist2" />
-                            }
-                            label="playlist2"
-                        />
-                        <FormControlLabel
-                            control={
-                                <Checkbox value="playlist3"
-                                />
-                            }
-                            label="playlist3"
-                        />
-                    </FormGroup>
+                <FormControl className={classes.formControl}>
+                    <InputLabel htmlFor="component-simple">Playlists</InputLabel>
+                    <Input
+                        id="component-simple"
+                        name='inputPlaylistsUri'
+                        value={inputPlaylistsUri}
+                        onChange={this.handleChange}
+                        aria-describedby="component-simple"
+                    />
+                    <FormHelperText id="component-helper-text">Enter playlist LIST by thier id's</FormHelperText>
                 </FormControl>
+
             </div>
         );
     }
 }
 
-EventForm.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(EventForm);
+export default withStyles(styles)(inject('store')(observer(EventForm)));

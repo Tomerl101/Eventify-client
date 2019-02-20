@@ -12,7 +12,7 @@ class Popup extends Component {
   };
 
   render() {
-    const { store } = this.props;
+    const { store,message } = this.props;
     const { isPopUpOpen } = store;
 
     return (
@@ -28,6 +28,7 @@ class Popup extends Component {
         <SnackBarWrapper
           onClose={this.handleClose}
           variant="success"
+          message={message}
         />
       </Snackbar>
     )

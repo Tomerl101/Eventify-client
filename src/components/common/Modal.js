@@ -5,8 +5,9 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import EventForm from './EventForm';
+import { Divider } from '@material-ui/core';
 
 const styles = theme => ({
   paper: {
@@ -26,6 +27,13 @@ class EventModal extends Component {
     setIsModalAddEventOpen(false);
   }
 
+  handleCreate = async () => {
+    const { setIsPopUpOpen, setIsModalAddEventOpen, createEvent } = this.props.store;
+    await createEvent();
+    setIsPopUpOpen(true);
+    setIsModalAddEventOpen(false);
+  }
+
   render() {
     const { isModalAddEventOpen } = this.props.store;
 
@@ -36,17 +44,18 @@ class EventModal extends Component {
         aria-labelledby="form-dialog-title"
       >
         <DialogContent>
-          <DialogContentText>
-            CREATE NEW EVENT
-            </DialogContentText>
+          <DialogTitle>
+            Create Event
+            </DialogTitle>
+          <Divider />
           <EventForm />
         </DialogContent>
         <DialogActions>
           <Button onClick={this.handleClose} color="primary">
-            CANCEL
+            Close
             </Button>
-          <Button onClick={this.handleClose} color="primary">
-            CREATE
+          <Button onClick={this.handleCreate} color="primary">
+            Create
             </Button>
         </DialogActions>
       </Dialog>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router'
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -41,6 +42,7 @@ class MenuList extends Component {
     }
     this.props.store.deleteEvent(eventId);
     this.handleClose();
+    this.props.history.goBack();
   }
 
   handleClose = () => {
@@ -80,4 +82,4 @@ class MenuList extends Component {
   }
 }
 
-export default withStyles(styles)(inject('store')(observer(MenuList)));
+export default withStyles(styles)(withRouter(inject('store')(observer(MenuList))));

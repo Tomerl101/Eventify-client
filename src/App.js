@@ -19,7 +19,6 @@ import 'typeface-roboto';
 //force strict 
 configure({ enforceActions: 'observed' });
 axios.defaults.baseURL = 'https://eventify-v2.herokuapp.com/';
-
 class App extends Component {
 
   componentWillMount() {
