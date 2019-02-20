@@ -20,13 +20,13 @@ class MusicButtons extends Component {
 
   render() {
 
-    const { classes, isPlaying, onClickPlay } = this.props;
+    const { classes, isPlaying, onClickPlay, onClickNext, onClickPrev } = this.props;
     return (
       <Row>
         <IconButton aria-label="repeat">
           <RepeatIcon fontSize='large' />
         </IconButton>
-        <IconButton aria-label="previous">
+        <IconButton onClick={onClickPrev} aria-label="previous">
           <SkipPreviousIcon fontSize='large' />
         </IconButton>
         <IconButton onClick={onClickPlay} aria-label="play" >
@@ -35,7 +35,7 @@ class MusicButtons extends Component {
               <PlayCircleFilledIcon className={classes.playBtnStyle} />
           }
         </IconButton>
-        <IconButton aria-label="forward">
+        <IconButton onClick={onClickNext} aria-label="forward">
           <SkipNextIcon fontSize='large' />
         </IconButton>
         <IconButton aria-label="shuffle">

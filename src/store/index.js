@@ -70,6 +70,14 @@ class Store {
     this.player.togglePlay();
   }
 
+  onClickNext() {
+    this.player.nextTrack();
+  }
+
+  onClickPrev() {
+    this.player.previousTrack();
+  }
+
   setIsPopUpOpen(isOpen) {
     this.isPopUpOpen = isOpen;
   }
@@ -187,6 +195,8 @@ decorate(Store, {
   onStateChanged: action.bound,
   setPlayer: action.bound,
   onClickPlay: action.bound,
+  onClickNext: action.bound,
+  onClickPrev: action.bound,
   onPlayerStateChanged: action.bound,
   setIsPopUpOpen: action.bound,
 })

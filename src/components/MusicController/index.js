@@ -13,14 +13,16 @@ import ProgressBar from '../common/ProgressBar';
 class MusicController extends Component {
   render() {
     const { classes, store } = this.props;
-    const { artistName, trackName, trackImage, duration, position, isPlaying, onClickPlay } = store
+    const { artistName, trackName, trackImage, duration,
+      position, isPlaying, onClickPlay, onClickNext, onClickPrev } = store
 
     return (
       <AppBar position='sticky' className={classes.appBar}>
         <ProgressBar position={position} duration={duration} />
         <Toolbar className={classes.toolbar}>
           <SongInfo artistName={artistName} trackName={trackName} imageUrl={trackImage} />
-          <MusicButtons isPlaying={isPlaying} duration={duration} onClickPlay={onClickPlay} />
+          <MusicButtons isPlaying={isPlaying} duration={duration} onClickPlay={onClickPlay}
+            onClickNext={onClickNext} onClickPrev={onClickPrev} />
           <MusicSettings />
         </Toolbar>
       </AppBar>

@@ -18,14 +18,14 @@ import 'typeface-roboto';
 
 //force strict 
 configure({ enforceActions: 'observed' });
-axios.defaults.baseURL = 'http://localhost:8080/';
+axios.defaults.baseURL = 'https://eventify-v2.herokuapp.com/';
 
 class App extends Component {
 
   componentWillMount() {
     const accessToken = parseTokenFromUrl();
     if (!accessToken) {
-      window.location.href = 'http://localhost:8080';
+      window.location.href = 'https://eventify-v2.herokuapp.com/';
     };
     window.location.hash = '';
     store.setAccessToken(accessToken);

@@ -29,7 +29,7 @@ class TracksTable extends Component {
 
   getRows = (items) => (
     items.map(({ track }, index) => (
-      <TableRow key={index} hover onClick={() => this.onClickPlayTrack(track.uri)}>
+      <TableRow key={index} hover onClick={() => this.onClickPlayTrack(track.uri, index)}>
         <TableCell component="th" scope="row">
           {`${index + 1}. ${track.name}`}
         </TableCell>
@@ -39,12 +39,11 @@ class TracksTable extends Component {
     ))
   )
 
-  onClickPlayTrack = (uri) => {
-    console.log('onclickplaytrack');
-    console.log('TCL: TracksTable -> onClickPlayTrack -> uri', uri)
+  onClickPlayTrack = (trackUri, index) => {
+    const playlistUri = window.location.pathname.split('/')[2]
     const { store } = this.props;
     const { deviceId, accessToken } = store;
-    putPlayTrack(deviceId, accessToken, uri)
+    putPlayTrack(deviceId, accessToken, playlistUri, trackUri, index)
   }
 
   render() {
