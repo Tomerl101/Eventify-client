@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router'
+import Fade from '@material-ui/core/Fade';
 import { withStyles } from '@material-ui/core/styles';
 import MuiCard from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -35,27 +36,29 @@ class EventCard extends Component {
   }
 
   render() {
-    const { classes, item } = this.props;
+    const { classes, item, time } = this.props;
     const { event_img: imageUrl, name: eventName } = item;
     return (
       <Grid item>
-        <MuiCard className={classes.card} onClick={this.onCardClick}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={imageUrl}
-              title={eventName}
-            />
-            <CardContent className={classes.cardContent}>
-              <Typography gutterBottom variant="h6">
-                {eventName}
-              </Typography>
-              <Typography component="p">
-                this is my amazing event playlist
+        <Fade in={true} timeout={time * 1500}>
+          <MuiCard className={classes.card} onClick={this.onCardClick}>
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image={imageUrl}
+                title={eventName}
+              />
+              <CardContent className={classes.cardContent}>
+                <Typography gutterBottom variant="h6">
+                  {eventName}
+                </Typography>
+                <Typography component="p">
+                  this is my amazing event playlist
           </Typography>
-            </CardContent>
-          </CardActionArea>
-        </MuiCard>
+              </CardContent>
+            </CardActionArea>
+          </MuiCard>
+        </Fade>
       </Grid>
     );
   }

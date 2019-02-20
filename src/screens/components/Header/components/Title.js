@@ -7,7 +7,7 @@ class Title extends Component {
     const { userName } = this.props.store
     return (
       <Typography variant="h6" >
-        {userName}
+        {userName} Top Events
       </Typography>
     )
   }

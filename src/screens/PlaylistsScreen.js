@@ -13,7 +13,7 @@ import { styles } from './style';
 class PlaylistsScreen extends React.Component {
   getPlaylistCards = () => {
     const { playlistsList } = this.props.store;
-    return playlistsList.map(p => <PlaylistCard item={p} key={p.id} />)
+    return playlistsList.map((p, i) => <PlaylistCard time={i} item={p} key={p.id} />)
   }
 
   render() {

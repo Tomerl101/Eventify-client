@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router'
 import { withStyles } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
 import MuiCard from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -11,7 +12,6 @@ import { getPlaylistTracks } from '../../server/getPlaylistTracks';
 
 const styles = theme => ({
   card: {
-    width: 215,
     width: 215,
     borderRadius: 1
   },
@@ -31,23 +31,27 @@ class PlaylistCard extends Component {
   }
 
   render() {
-    const { classes, item } = this.props;
+    const { classes, item, time } = this.props;
     const { images, name: playlistName } = item;
     const { url } = images[0]
 
     return (
       <Grid item>
-        <MuiCard className={classes.card} onClick={this.onCardClick}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={url}
-            />
-          </CardActionArea>
-        </MuiCard>
-        <Typography gutterBottom variant="body2" component="p">
-          {playlistName}
-        </Typography>
+        <Fade in={true} timeout={time * 1500}>
+          <div>
+            <MuiCard className={classes.card} onClick={this.onCardClick}>
+              <CardActionArea>
+                <CardMedia
+                  className={classes.media}
+                  image={url}
+                />
+              </CardActionArea>
+            </MuiCard>
+            <Typography gutterBottom variant="body2" component="p">
+              {playlistName}
+            </Typography>
+          </div>
+        </Fade>
       </Grid>
     );
   }

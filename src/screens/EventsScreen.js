@@ -17,7 +17,7 @@ class EventScreen extends React.Component {
   }
   getEventsCards = () => {
     const { eventsList } = this.props.store;
-    return eventsList.map(e => <EventCard item={e} key={e._id} />)
+    return eventsList.map((e, i) => <EventCard time={i + 1} item={e} key={e._id} />)
   }
 
   render() {
