@@ -9,17 +9,17 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/ControlPoint';
+import AddIcon from '@material-ui/icons/PlaylistAdd';
 
 const styles = theme => ({
     card: {
         width: 230,
-        Height: 200
     },
     media: {
     },
     cardContent: {
-        height: 284,
+        height: 321,
+        padding: 0,
         backgroundColor: theme.palette.secondary.light,
         display: 'flex',
         justifyContent: 'center',
@@ -53,7 +53,7 @@ class AddEventCard extends Component {
                     <CardActionArea>
                         <CardContent className={classes.cardContent}>
                             <IconButton aria-label="forward">
-                                <AddIcon fontSize='large' />
+                                <AddIcon style={{ fontSize: '462%' }} />
                             </IconButton>
                         </CardContent>
                     </CardActionArea>

@@ -14,14 +14,14 @@ import { getEventPlaylists } from '../../server/getEventPlaylists';
 const styles = theme => ({
   card: {
     width: 230,
-    minHeight: 200
+    // minHeight: 220
   },
   media: {
-    height: 180,
+    height: 220,
   },
   cardContent: {
     backgroundColor: theme.palette.secondary.light,
-    height: 100
+    height: 69
   },
 });
 
