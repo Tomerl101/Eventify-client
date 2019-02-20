@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import { Provider } from 'mobx-react';
 import { configure } from "mobx";
+import axios from 'axios';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import axios from 'axios';
+import { store } from './store';
 import { theme } from './theme';
-import NavBar from './components/NavBar';
-import Tabs from './components/Tabs';
 import EventsScreen from './screens/EventsScreen';
 import PlaylistsScreen from './screens/PlaylistsScreen';
 import MusicController from './components/MusicController';
-import { Provider } from 'mobx-react';
-import { store } from './store';
+import Tabs from './components/Tabs';
+import NavBar from './components/NavBar';
+import TracksScreen from './screens/TracksScreen';
 import { parseTokenFromUrl } from './utils/parseToken';
 import { screenTypes } from './store/screenTypes';
 import 'typeface-roboto';
@@ -46,6 +47,7 @@ class App extends Component {
               <Tabs />
               <Route exact path={screenTypes.SCREEN_EVENTS} component={EventsScreen} />
               <Route path={screenTypes.SCREEN_PLAYLISTS} component={PlaylistsScreen} />
+              <Route path={screenTypes.SCREEN_TRACKS} component={TracksScreen} />
               <MusicController />
             </>
           </Provider>

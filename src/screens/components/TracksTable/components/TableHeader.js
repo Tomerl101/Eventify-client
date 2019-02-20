@@ -8,9 +8,8 @@ export default function TableHeader() {
     <TableHead>
       <TableRow hover>
         <TableCell>TITLE</TableCell>
-        <TableCell align="right">ARTIST</TableCell>
-        <TableCell align="right">ALBUM</TableCell>
-        <TableCell align="right">DURATION</TableCell>
+        <TableCell>ARTIST</TableCell>
+        <TableCell>ALBUM</TableCell>
       </TableRow>
     </TableHead>
   )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import { withRouter } from 'react-router'
 import { withStyles } from '@material-ui/core/styles';
 import MuiCard from '@material-ui/core/Card';
@@ -7,25 +8,29 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import { getEventPlaylists } from '../../server/getEventPlaylists';
 
 const styles = theme => ({
   card: {
-    width: 275,
-    height: 340
+    width: 230,
+    minHeight: 200
   },
   media: {
     height: 180,
   },
   cardContent: {
-    backgroundColor: theme.palette.secondary.light
-  }
+    backgroundColor: theme.palette.secondary.light,
+    height: 100
+  },
 });
 
 
-class Card extends Component {
+class EventCard extends Component {
 
-  onCardClick = () => {
+  onCardClick = async () => {
     const { _id } = this.props.item;
+    const playlistsList = await getEventPlaylists(_id);
+    this.props.store.setPlaylistsList(playlistsList);
     this.props.history.push(`/playlists/${_id}`);
   }
 
@@ -42,7 +47,7 @@ class Card extends Component {
               title={eventName}
             />
             <CardContent className={classes.cardContent}>
-              <Typography gutterBottom variant="h6" component="h5">
+              <Typography gutterBottom variant="h6">
                 {eventName}
               </Typography>
               <Typography component="p">
@@ -56,4 +61,4 @@ class Card extends Component {
   }
 }
 
-export default withStyles(styles)(withRouter(Card));
+export default withStyles(styles)(withRouter(inject('store')(observer(EventCard))));

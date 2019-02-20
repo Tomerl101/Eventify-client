@@ -20,8 +20,7 @@ class MusicButtons extends Component {
 
   render() {
 
-    const { classes, isPlaying, duration, onClickPlay } = this.props;
-    console.log('TCL: MusicButtons -> render -> controllerState', isPlaying)
+    const { classes, isPlaying, onClickPlay } = this.props;
     return (
       <Row>
         <IconButton aria-label="repeat">

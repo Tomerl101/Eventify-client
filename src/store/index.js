@@ -53,8 +53,6 @@ class Store {
     this.tracksList = tracks;
   }
 
-
-
   async getUserInfo() {
     this.setIsLoading(true);
     const result = await getUserInfoServer();

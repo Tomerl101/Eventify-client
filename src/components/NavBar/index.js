@@ -27,7 +27,7 @@ class NavBar extends Component {
             <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
               <MenuIcon fontSize='large' />
             </IconButton>
-            <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+            <Typography className={classes.title} variant="h6" color="inherit">
               Eventify
             </Typography>
             <div className={classes.grow} />
