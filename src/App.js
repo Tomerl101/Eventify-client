@@ -33,6 +33,16 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    window.onSpotifyWebPlaybackSDKReady = () => {
+      const { accessToken } = store;
+      let player = new window.Spotify.Player({
+        name: 'Eventify Player',
+        getOAuthToken: cb => { cb(accessToken); }
+      });
+      store.setPlayer(player);
+      store.createEventHandlers();
+      player.connect();
+    }
     await store.getUserInfo();
     await store.getUserEvents();
   }
