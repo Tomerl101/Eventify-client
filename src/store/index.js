@@ -23,12 +23,17 @@ class Store {
   tracksList = [];
   trackUri;
   playlistUri;
+  isModalAddEventOpen = false;
   isLoading = false;
   isPlaying = false;
   player = '';
 
   setIsLoading(isLoading) {
     this.isLoading = isLoading;
+  }
+
+  setIsModalAddEventOpen(isOpen) {
+    this.isModalAddEventOpen = isOpen;
   }
 
   setAccessToken(accessToken) {
@@ -155,6 +160,7 @@ decorate(Store, {
   isLoading: observable,
   isPlaying: observable,
   player: observable,
+  isModalAddEventOpen: observable,
   setAccessToken: action.bound,
   setUserId: action.bound,
   setUserImage: action.bound,
@@ -162,6 +168,7 @@ decorate(Store, {
   getUserInfo: action.bound,
   getUserevents: action.bound,
   setIsLoading: action.bound,
+  setIsModalAddEventOpen: action.bound,
   setEventsList: action.bound,
   onStateChanged: action.bound,
   setPlayer: action.bound,
