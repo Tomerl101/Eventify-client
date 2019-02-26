@@ -1,6 +1,10 @@
-Eventify - wrap your favorite spotify playlists in "Event" and start listen to tracks using the spotify SDK.
+#Eventify
+---
+wrap your favorite spotify playlists in "Event" and start listen to tracks using the spotify SDK.
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/cMLRYbZ"><a href="//imgur.com/cMLRYbZ"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+(https://imgur.com/AMcPpmY)
+(https://imgur.com/qVuFUnk)
+(https://imgur.com/sOc5TO6)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
