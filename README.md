@@ -2,9 +2,9 @@
 ---
 wrap your favorite spotify playlists in "Event" and start listen to tracks using the spotify SDK.
 
-(https://imgur.com/AMcPpmY)
-(https://imgur.com/qVuFUnk)
-(https://imgur.com/sOc5TO6)
+![image1](https://imgur.com/AMcPpmY)
+![image2](https://imgur.com/qVuFUnk)
+![image3](https://imgur.com/sOc5TO6)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
